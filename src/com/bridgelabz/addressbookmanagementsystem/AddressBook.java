@@ -42,4 +42,25 @@ public class AddressBook {
         contacts.setEmail(email);
         System.out.println(contacts);
     }
+
+    // Displaying added contact in Address Book
+    public void displayContact() {
+        System.out.println("Your contact details are : ");
+        String firstName1 = contacts.getfirstName();
+        System.out.println("First Name : " + firstName1);
+        String lastName1 = contacts.getlastName();
+        System.out.println("Last Name : " + lastName1);
+        String address1 = contacts.getAddress();
+        System.out.println("Address : " + address1);
+        String city1 = contacts.getCity();
+        System.out.println("City : " + city1);
+        String state1 = contacts.getState();
+        System.out.println("State : " + state1);
+        String pinCode1 = contacts.getPinCode();
+        System.out.println("Pin Code : " + pinCode1);
+        String mobileNo1 = contacts.getMobileNo();
+        System.out.println("Mobile No : " + mobileNo1);
+        String email1 = contacts.getEmail();
+        System.out.println("Email id : " + email1);
+    }
 }
