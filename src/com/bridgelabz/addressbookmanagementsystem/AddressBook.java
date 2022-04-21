@@ -20,7 +20,8 @@ public class AddressBook {
         int option;
         boolean check = false;
         do {
-            System.out.println("Press\n1. To add a new contact \n2. To Display contact \n3. To Edit \n4. To Exit");
+            System.out.println("Press\n1. To add a new contact \n2. To Display contact \n3. To Edit \n4. To Delete \n5. To Exit");
+            System.out.println();
             option = sc.nextInt();
             sc.nextLine();
             switch (option) {
@@ -34,6 +35,9 @@ public class AddressBook {
                     editContact();
                     break;
                 case 4:
+                    deleteContact();
+                    break;
+                case 5:
                     check = true;
                     System.out.println("Thank You");
                     break;
@@ -42,8 +46,7 @@ public class AddressBook {
                     break;
             }
             System.out.println("------------------------------------------------------------------------------");
-        }
-        while (!check);
+        } while (!check);
     }
 
     /*
@@ -118,6 +121,29 @@ public class AddressBook {
             System.out.println("Please Enter valid first name");
             System.out.println();
             editContact();
+        }
+    }
+
+    // Method to delete contacts of Address Book
+    public void deleteContact() {
+        System.out.println("Enter original first name for verification :");
+        String deleteName = sc.next();
+
+        if (deleteName.equals(contact.getfirstName())) {
+            contact.setfirstName(null);
+            contact.setlastName(null);
+            contact.setMobileNo(null);
+            contact.setCity(null);
+            contact.setState(null);
+            contact.setPinCode(null);
+            contact.setEmail(null);
+            System.out.println("deleted successfully...");
+            System.out.println();
+        } else {
+            System.out.println("Invalid first name");
+            System.out.println("Please Enter valid first name");
+            System.out.println();
+            deleteContact();
         }
     }
 }
