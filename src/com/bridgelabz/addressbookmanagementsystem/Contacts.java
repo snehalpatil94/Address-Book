@@ -1,59 +1,57 @@
 package com.bridgelabz.addressbookmanagementsystem;
 
-/**
- * contact details of person
- *
- * @author : Snehal Patil
- */
-
 public class Contacts {
     // Variable
     private String firstName;
     private String lastName;
-    private String address;
+    private String mobileNumber;
+    private String email;
     private String city;
     private String state;
     private String pinCode;
-    private String mobileNo;
-    private String email;
 
-    // Parameterised Constructor
-    public Contacts(String firstName, String lastName, String address, String city, String state, String pincode,
-                    String mobileNo, String email) {
-
+    // Constructor
+    public Contacts(String firstName, String lastName, String mobileNumber, String city, String state, String pinCode, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
+        this.mobileNumber = mobileNumber;
         this.city = city;
         this.state = state;
-        this.pinCode = pincode;
-        this.mobileNo = mobileNo;
+        this.pinCode = pinCode;
         this.email = email;
     }
 
     // Getter and Setter methods
-    public String getfirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setfirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getlastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setlastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getMobileNumberNumber() {
+        return mobileNumber;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setmobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getCity() {
@@ -76,28 +74,14 @@ public class Contacts {
         return pinCode;
     }
 
-    public void setPinCode(String pinCode) {
-        this.pinCode = pinCode;
-    }
-
-    public String getMobileNo() {
-        return mobileNo;
-    }
-
-    public void setMobileNo(String mobileNo) {
-        this.mobileNo = mobileNo;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String eMail) {
-        this.email = eMail;
+    public void setPinCode(String pincode) {
+        this.pinCode = pincode;
     }
 
     @Override
     public String toString() {
-        return "Contacts {" + "\n FirstName : " + firstName + ", LastName : " + lastName + " \n Address : " + address + ", City : " + city + ", State : " + state + "\n Mobile No : " + mobileNo + ", Pin-Code : " + pinCode + ", \n Email : " + email + '}';
+        return "Contact[" + "First Name='" + firstName + '\'' + ", Last Name='" + lastName + '\'' + ", Mobile Number='"
+                + mobileNumber + '\'' + ", Email='" + email + '\'' + ", City='" + city + '\'' + ", State='" + state
+                + '\'' + ", Pincode='" + pinCode + '\'' + ']';
     }
 }
