@@ -41,19 +41,20 @@ public class AddressBookDirectory {
 
     // Method to Display Address Books present in Directory
     public static void displayAddressBooks() {
-        System.out.println("Address Books in Directory : ");
+        System.out.println("\n***** Address Books in Directory ***** ");
         for (String key : addressBookDirctoryMap.keySet()) {
             System.out.println(key);
         }
+        System.out.println("---------------------------------------");
     }
 
     // Method to Edit Address Book
     public static void editAddressBook() {
         displayAddressBooks();
-        System.out.println("Enter the Address Book Name :");
+        System.out.println("\nEnter the Address Book Name :");
         String addressbookName = sc.next();
         if (addressBookDirctoryMap.containsKey(addressbookName)) {
-            addressBookDirctoryMap.get(addressbookName).getmenu(addressBookDirctoryMap.get(addressbookName));
+            addressBookDirctoryMap.get(addressbookName).addressBookMenu(addressBookDirctoryMap.get(addressbookName));
         } else {
             System.out.println("Entered Address Book Name is Invalid !");
         }

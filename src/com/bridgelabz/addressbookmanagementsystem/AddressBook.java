@@ -1,7 +1,10 @@
 package com.bridgelabz.addressbookmanagementsystem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /* *
  * Address book functions
@@ -12,26 +15,49 @@ import java.util.Scanner;
 public class AddressBook {
     Scanner sc = new Scanner(System.in);
     ArrayList<Contacts> contactList = new ArrayList<Contacts>();
+    HashMap<String, Contacts> contactService = new HashMap<>();
 
     // Method to add contacts in address book
     public void addContact() {
-        System.out.println("Enter the first name : ");
-        String firstName = sc.next();
-        System.out.println("Enter the last name : ");
-        String lastName = sc.next();
-        System.out.println("Enter the phone no : ");
-        String mobileNumber = sc.next();
-        System.out.println("Enter the city : ");
-        String city = sc.next();
-        System.out.println("Enter the state : ");
-        String state = sc.next();
-        System.out.println("Enter the Pin-Code : ");
-        String pincode = sc.next();
-        System.out.println("Enter Email id : ");
-        String email = sc.next();
+        boolean found = false;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter First Name : ");
+        String firstName = scanner.next();
 
-        contactList.add(new Contacts(firstName, lastName, mobileNumber, city, state, pincode, email));
-        System.out.println(contactList);
+        //checked duplicate name in the address book
+        for (int j = 0; j < contactList.size(); j++) {
+
+            List<String> names = contactList.stream().map(Contacts::getFirstName).collect(Collectors.toList());
+
+            for (int k = 0; k < names.size(); k++) {
+                if (names.get(j).equals(firstName)) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        if (found == true) {
+            System.out.println("Person Name is already in the address book!");
+        } else {
+            //System.out.println("Enter the first name : ");
+            //firstName = sc.next();
+            System.out.println("Enter the last name : ");
+            String lastName = sc.next();
+            System.out.println("Enter the phone no : ");
+            String mobileNumber = sc.next();
+            System.out.println("Enter the city : ");
+            String city = sc.next();
+            System.out.println("Enter the state : ");
+            String state = sc.next();
+            System.out.println("Enter the Pin-Code : ");
+            String pincode = sc.next();
+            System.out.println("Enter Email id : ");
+            String email = sc.next();
+
+            contactList.add(new Contacts(firstName, lastName, mobileNumber, city, state, pincode, email));
+            System.out.println(contactList);
+            System.out.println("Contact added successfully");
+        }
     }
 
     // Method to display contacts from address book
@@ -83,6 +109,7 @@ public class AddressBook {
                 }
             }
             System.out.println(contactList);
+            System.out.println("Contact edited successfully");
         }
     }
 
@@ -109,8 +136,8 @@ public class AddressBook {
     }
 
     // Function to take user's choice of operation
-    public void getmenu(AddressBook Addressbook) {
-        System.out.println("Menu of Address Book");
+    public void addressBookMenu(AddressBook Addressbook) {
+        System.out.println("\nMenu of Address Book : ");
         boolean check = false;
         do {
             System.out.println("Enter your choice \n 1. Add contact \n 2. Edit contact \n 3. Delete contact \n 4. Display \n 5. Exit");
@@ -118,11 +145,9 @@ public class AddressBook {
             switch (option) {
                 case "1":
                     addContact();
-                    System.out.println("Contact added successfully");
                     break;
                 case "2":
                     editContact();
-                    System.out.println("Contact edited successfully");
                     break;
                 case "3":
                     deleteContact();

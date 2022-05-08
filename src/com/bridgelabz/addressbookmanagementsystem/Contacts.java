@@ -3,6 +3,10 @@ package com.bridgelabz.addressbookmanagementsystem;
 public class Contacts {
     // Variable
     private String firstName;
+
+    public Contacts() {
+    }
+
     private String lastName;
     private String mobileNumber;
     private String email;

@@ -3,8 +3,7 @@ package com.bridgelabz.addressbookmanagementsystem;
 import java.util.Scanner;
 
 /**
- * Program to add multiple Address Book to the System. Each Address Book has a unique Name - Use Console to add new
- * Address Book
+ * Ability to ensure there is no Duplicate Entry of the same Person in a particular Address Book
  *
  * @author : Snehal Patil
  */
