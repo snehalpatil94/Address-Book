@@ -1,11 +1,9 @@
 package com.bridgelabz.addressbookmanagementsystem;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /* *
  * Address book functions
@@ -27,10 +25,12 @@ public class AddressBook {
     }
 
     public void setAddressBookName(String addressBookName) {
+
         this.addressBookName = addressBookName;
     }
 
     public ArrayList<Contacts> getContacts() {
+
         return new ArrayList<Contacts>(ContactsList.values());
     }
 
@@ -41,8 +41,8 @@ public class AddressBook {
         boolean change = false;
         do {
             System.out.println("\n***** Address Book operation menu :***** ");
-            System.out.println(
-                    "1.Add Contacts To Address Book\n2.Edit Existing Contacts\n3.Delete Contacts\n4.Display Address book Contacts list\n5.Exit Address book ");
+            System.out.println("1.Add Contacts To Address Book\n2.Edit Existing Contacts\n3.Delete Contacts\n4.Display" +
+                    " Address book Contacts list \n5.Sort Address Book Alphabetically \n6.Exit Address book ");
             System.out.println("\nEnter your choice : ");
             String choice = sc.next();
             switch (choice) {
@@ -59,6 +59,9 @@ public class AddressBook {
                     displayContents();
                     break;
                 case "5":
+                    sortAddressBook();
+                    break;
+                case "6":
                     System.out.println("Thank you for using Address Book ! \nExiting Address Book: " + this.getAddressBookName() + " !");
                     change = true;
                     break;
@@ -221,6 +224,27 @@ public class AddressBook {
             ArrayList<Contacts> stateList = new ArrayList<Contacts>();
             stateList.add(Contacts);
             state.put(Contacts.getAddress().getState(), stateList);
+        }
+    }
+
+    /*
+     * This method to sort alphabetically
+     */
+    public void sortAddressBook() {
+        List<Contacts> sortedContactList;
+        sortedContactList = ContactsList.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getFirstName().compareTo(secondPerson.getFirstName())).collect(Collectors.toList());
+        printSortedList(sortedContactList);
+    }
+
+    /*
+     *This method is tp print sorted Address Book
+     */
+    public void printSortedList(List<Contacts> sortedContactList) {
+        System.out.println("\n****** Sorted address book " + this.getAddressBookName() + " *******");
+        Iterator iterator = sortedContactList.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+            System.out.println();
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.bridgelabz.addressbookmanagementsystem;
 
 /**
- * Program to get number of contact persons i.e. count by City or State
+ * Program to sort the entries in the address book alphabetically by Person’s name
  *
  * @author : Snehal Patil
  */
