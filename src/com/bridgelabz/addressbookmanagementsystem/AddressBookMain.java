@@ -1,7 +1,7 @@
 package com.bridgelabz.addressbookmanagementsystem;
 
 /**
- * Program to sort the entries in the address book alphabetically by Person’s name
+ * Program to sort the entries in the address book by City, State, or Zip
  *
  * @author : Snehal Patil
  */

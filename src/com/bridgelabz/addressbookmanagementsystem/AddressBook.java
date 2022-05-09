@@ -42,7 +42,7 @@ public class AddressBook {
         do {
             System.out.println("\n***** Address Book operation menu :***** ");
             System.out.println("1.Add Contacts To Address Book\n2.Edit Existing Contacts\n3.Delete Contacts\n4.Display" +
-                    " Address book Contacts list \n5.Sort Address Book Alphabetically \n6.Exit Address book ");
+                    " Address book Contacts list \n5.Sort Address Book \n6.Exit Address book ");
             System.out.println("\nEnter your choice : ");
             String choice = sc.next();
             switch (choice) {
@@ -228,12 +228,36 @@ public class AddressBook {
     }
 
     /*
-     * This method to sort alphabetically
+     * This method to sort Address Book
      */
     public void sortAddressBook() {
         List<Contacts> sortedContactList;
-        sortedContactList = ContactsList.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getFirstName().compareTo(secondPerson.getFirstName())).collect(Collectors.toList());
-        printSortedList(sortedContactList);
+        System.out.println("\nOn what basis you want to sort address book..");
+        System.out.println("1. First name\n2. City\n3. State\n4. Zip Code");
+        int sortingChoice = sc.nextInt();
+        switch (sortingChoice) {
+            case 1:
+                sortedContactList = ContactsList.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getFirstName().
+                        compareTo(secondPerson.getFirstName())).collect(Collectors.toList());
+                printSortedList(sortedContactList);
+                break;
+            case 2:
+                sortedContactList = ContactsList.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getAddress()
+                        .getCity().compareTo(secondPerson.getAddress().getCity())).collect(Collectors.toList());
+                printSortedList(sortedContactList);
+                break;
+            case 3:
+                sortedContactList = ContactsList.values().stream().sorted((firstPerson, secondPerson) -> firstPerson.getAddress()
+                        .getState().compareTo(secondPerson.getAddress().getState())).collect(Collectors.toList());
+                printSortedList(sortedContactList);
+                break;
+            case 4:
+                sortedContactList = ContactsList.values().stream().sorted((firstPerson, secondPerson) ->Long.valueOf(firstPerson.getAddress()
+                        .getpinCode()).compareTo(Long.valueOf(secondPerson.getAddress().getpinCode()))).collect(Collectors.toList());
+                printSortedList(sortedContactList);
+                break;
+
+        }
     }
 
     /*
