@@ -3,73 +3,142 @@ package com.bridgelabz.addressbookmanagementsystem;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
-/**
+import java.util.ArrayList;
+/* *
  * Address book Directory functions
  *
- * @author : Snehal Patil
+ * @auther : Snehal Patil
  */
 
 public class AddressBookDirectory {
+    public AddressBook addressBook;
+    Scanner sc = new Scanner(System.in);
+    Map<String, AddressBook> addressBookDirectory = new HashMap<String, AddressBook>();
 
-    static Map<String, AddressBook> addressBookDirctoryMap = new HashMap<>();
-
-    AddressBookDirectory addressBookDirectory = new AddressBookDirectory();
-
-    // Getter and Setter for Address Book Directory
-    public static Map<String, AddressBook> getAddressBookMap() {
-        return addressBookDirctoryMap;
+    /*
+     * Creating switch case to take user choice of operation
+     */
+    public void directoryMenu() {
+        boolean check = false;
+        String choice;
+        do {
+            System.out.println("\n****** Directory option menu :****** ");
+            System.out.println(
+                    "1.Add an Address Book\n2.Edit Existing Address Book\n3.Display Address book Directory\n4.Search Person By Region\n5.Exit Address book System");
+            System.out.println("\nPlease Select the Operation Number : ");
+            choice = sc.next();
+            switch (choice) {
+                case "1":
+                    addAddressBook();
+                    break;
+                case "2":
+                    editAddressBook();
+                    break;
+                case "3":
+                    displayDirectoryContents();
+                    break;
+                case "4":
+                    System.out.println("Enter \n1.Search By City\n2.Search By State");
+                    int searchChoice = sc.nextInt();
+                    if (searchChoice == 1)
+                        searchByCity();
+                    else
+                        searchByState();
+                    break;
+                case "5":
+                    System.out.println("Thank You for using Address Book Directory System !");
+                    check = true;
+                    break;
+                default:
+                    System.out.println("Please Enter Valid Option !");
+                    break;
+            }
+            System.out.println("--------------------------------------------------------------------------------------------------------------");
+        } while (!check);
     }
 
-    public static void setAddressBookMap(Map<String, AddressBook> addressBookMap) {
-        AddressBookDirectory.addressBookDirctoryMap = addressBookMap;
-    }
+    /*
+     * Adding new address book in Directory .First checks book is already present in Directory
+     * if not then add in Directory
+     */
+    public void addAddressBook() {
 
-    static Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the name of the Address Book you want to add : ");
+        String bookNameToAdd = sc.next();
 
-    // Method to add Address Book in Directory
-    public static void addNewAddressBook() {
-        System.out.println("Enter the Address Book Name :");
-        String addressbookName = sc.next();
-        if (addressBookDirctoryMap.containsKey(addressbookName)) {
-            System.out.println("This AddressBook is Already Available !");
+        if (addressBookDirectory.containsKey(bookNameToAdd)) {
+            System.out.println("This Address Book Already Exists");
         } else {
             AddressBook addressBook = new AddressBook();
-            addressBookDirctoryMap.put(addressbookName, addressBook);
+            addressBook.setAddressBookName(bookNameToAdd);
+            addressBookDirectory.put(bookNameToAdd, addressBook);
+            System.out.println("Address book added successfully.");
+            addressBook.addressBookMenu();
         }
     }
 
-    // Method to Display Address Books present in Directory
-    public static void displayAddressBooks() {
-        System.out.println("\n***** Address Books in Directory ***** ");
-        for (String key : addressBookDirctoryMap.keySet()) {
-            System.out.println(key);
-        }
-        System.out.println("---------------------------------------");
-    }
+    /*
+     * In this method.. calling existing address book and editing them.
+     */
+    public void editAddressBook() {
 
-    // Method to Edit Address Book
-    public static void editAddressBook() {
-        displayAddressBooks();
-        System.out.println("\nEnter the Address Book Name :");
-        String addressbookName = sc.next();
-        if (addressBookDirctoryMap.containsKey(addressbookName)) {
-            addressBookDirctoryMap.get(addressbookName).addressBookMenu(addressBookDirctoryMap.get(addressbookName));
+        System.out.println("Enter the Name of the Address Book which you want to edit:");
+        String addressBookToEdit = sc.next();
+
+        if (addressBookDirectory.containsKey(addressBookToEdit)) {
+            addressBook = addressBookDirectory.get(addressBookToEdit);
+            addressBook.addressBookMenu();
         } else {
-            System.out.println("Entered Address Book Name is Invalid !");
+            System.out.println("Book Does Not Exist");
         }
     }
 
-    // Method to Delete Address Book
-    public static void deleteAddressBook() {
-        displayAddressBooks();
-        System.out.println("Enter the Address Book Name :");
-        String addressbookName = sc.next();
-        if (addressBookDirctoryMap.containsKey(addressbookName)) {
-            addressBookDirctoryMap.remove(addressbookName);
-            System.out.println("Address Book is Deleted !");
-        } else {
-            System.out.println("Entered Address Book Name is Invalid !");
+    /*
+     * This method to searching person by his/her city name
+     */
+    public void searchByCity() {
+
+        System.out.println("Enter the name of the City where the Person resides : ");
+        String cityName = sc.next();
+        System.out.println("Enter the name of the Person : ");
+        String personName = sc.next();
+
+        for (AddressBook addressBook : addressBookDirectory.values()) {
+            ArrayList<Contacts> ContactsList = addressBook.getContacts();
+            ContactsList.stream()
+                    .filter(person -> person.getFirstName().equals(personName)
+                            && person.getAddress().getCity().equals(cityName))
+                    .forEach(person -> System.out.println(person));
+        }
+    }
+
+    /*
+     * This method to searching person by his/her state name
+     */
+    public void searchByState() {
+
+        System.out.println("Enter the name of the State where the Person resides : ");
+        String stateName = sc.next();
+        System.out.println("Enter the name of the Person : ");
+        String personName = sc.next();
+
+        for (AddressBook addressBook : addressBookDirectory.values()) {
+            ArrayList<Contacts> ContactsList = ((AddressBook) addressBook).getContacts();
+            ContactsList.stream()
+                    .filter(person -> person.getFirstName().equals(personName)
+                            && person.getAddress().getState().equals(stateName))
+                    .forEach(person -> System.out.println(person));
+        }
+    }
+
+    /*
+     * This method is to display address Book present in Directory
+     */
+    public void displayDirectoryContents() {
+
+        System.out.println("***** Contents of the Address Book Directory *****");
+        for (String eachBookName : addressBookDirectory.keySet()) {
+            System.out.println(eachBookName);
         }
     }
 }
