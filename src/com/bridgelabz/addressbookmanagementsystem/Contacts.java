@@ -1,31 +1,10 @@
 package com.bridgelabz.addressbookmanagementsystem;
 
 public class Contacts {
-    // Variable
-    private String firstName;
+    private String firstName, lastName, email, mobileNumber;
+    Address address;
 
-    public Contacts() {
-    }
-
-    private String lastName;
-    private String mobileNumber;
-    private String email;
-    private String city;
-    private String state;
-    private String pinCode;
-
-    // Constructor
-    public Contacts(String firstName, String lastName, String mobileNumber, String city, String state, String pinCode, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mobileNumber = mobileNumber;
-        this.city = city;
-        this.state = state;
-        this.pinCode = pinCode;
-        this.email = email;
-    }
-
-    // Getter and Setter methods
+    // Getter and Setter Methods
     public String getFirstName() {
         return firstName;
     }
@@ -42,14 +21,6 @@ public class Contacts {
         this.lastName = lastName;
     }
 
-    public String getMobileNumberNumber() {
-        return mobileNumber;
-    }
-
-    public void setmobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -58,34 +29,25 @@ public class Contacts {
         this.email = email;
     }
 
-    public String getCity() {
-        return city;
+    public String getmobileNumber() {
+        return mobileNumber;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setmobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
-    public String getState() {
-        return state;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getPinCode() {
-        return pinCode;
-    }
-
-    public void setPinCode(String pincode) {
-        this.pinCode = pincode;
+    public Address getAddress() {
+        return address;
     }
 
     @Override
     public String toString() {
-        return "Contact[" + "First Name='" + firstName + '\'' + ", Last Name='" + lastName + '\'' + ", Mobile Number='"
-                + mobileNumber + '\'' + ", Email='" + email + '\'' + ", City='" + city + '\'' + ", State='" + state
-                + '\'' + ", Pincode='" + pinCode + '\'' + ']';
+        return "Contact [First Name=" + firstName + ", Last Name=" + lastName + ", Email=" + email + ", Mobile Number="
+                + mobileNumber + " , " + address + "]";
     }
 }
