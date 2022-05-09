@@ -1,7 +1,7 @@
 package com.bridgelabz.addressbookmanagementsystem;
 
 /**
- * Program to search Person in a City or State across the multiple AddressBook .
+ * Program to view Persons by City or State
  *
  * @author : Snehal Patil
  */
