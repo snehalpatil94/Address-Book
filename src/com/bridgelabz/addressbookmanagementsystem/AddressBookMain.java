@@ -1,7 +1,7 @@
 package com.bridgelabz.addressbookmanagementsystem;
 
 /**
- * Program to view Persons by City or State
+ * Program to get number of contact persons i.e. count by City or State
  *
  * @author : Snehal Patil
  */
