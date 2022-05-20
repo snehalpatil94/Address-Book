@@ -1,7 +1,7 @@
 package com.bridgelabz.addressbookmanagementsystem;
 
 /**
- * Program to sort the entries in the address book by City, State, or Zip
+ * Program to Read or Write the Address Book with Persons Contact into a File using File IO
  *
  * @author : Snehal Patil
  */
@@ -14,5 +14,6 @@ public class AddressBookMain {
         // Calling directoryMenu method to perform user choice of operation
         AddressBookDirectory addressBookDirectory = new AddressBookDirectory();
         addressBookDirectory.directoryMenu();
+
     }
 }

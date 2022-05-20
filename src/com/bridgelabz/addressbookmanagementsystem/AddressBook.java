@@ -1,5 +1,10 @@
 package com.bridgelabz.addressbookmanagementsystem;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
@@ -42,7 +47,8 @@ public class AddressBook {
         do {
             System.out.println("\n***** Address Book operation menu :***** ");
             System.out.println("1.Add Contacts To Address Book\n2.Edit Existing Contacts\n3.Delete Contacts\n4.Display" +
-                    " Address book Contacts list \n5.Sort Address Book \n6.Exit Address book ");
+                    " Address book Contacts list \n5.Sort Address Book \n6.Write Data in Address Book \n7.Read Data " +
+                    "from Address Book  \n8.Exit Address book ");
             System.out.println("\nEnter your choice : ");
             String choice = sc.next();
             switch (choice) {
@@ -62,6 +68,12 @@ public class AddressBook {
                     sortAddressBook();
                     break;
                 case "6":
+                    writeDataToFile();
+                    break;
+                case "7":
+                    readDataFromFile();
+                    break;
+                case "8":
                     System.out.println("Thank you for using Address Book ! \nExiting Address Book: " + this.getAddressBookName() + " !");
                     change = true;
                     break;
@@ -252,7 +264,7 @@ public class AddressBook {
                 printSortedList(sortedContactList);
                 break;
             case 4:
-                sortedContactList = ContactsList.values().stream().sorted((firstPerson, secondPerson) ->Long.valueOf(firstPerson.getAddress()
+                sortedContactList = ContactsList.values().stream().sorted((firstPerson, secondPerson) -> Long.valueOf(firstPerson.getAddress()
                         .getpinCode()).compareTo(Long.valueOf(secondPerson.getAddress().getpinCode()))).collect(Collectors.toList());
                 printSortedList(sortedContactList);
                 break;
@@ -270,5 +282,46 @@ public class AddressBook {
             System.out.println(iterator.next());
             System.out.println();
         }
+    }
+
+    /*
+     * Method to write data for IO Stream
+     */
+    public void writeDataToFile() {
+        String bookName = this.getAddressBookName();
+        String fileName = bookName+".txt";
+
+        StringBuffer addressBookBuffer = new StringBuffer();
+        ContactsList.values().stream().forEach(contact -> {
+            String personData = contact.toString().concat("\n");
+            addressBookBuffer.append(personData);
+        });
+
+        try {
+            Files.write(Paths.get("Delhi.txt"), addressBookBuffer.toString().getBytes(), StandardOpenOption.APPEND);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+     * Method to read data from file
+     */
+    public List<String> readDataFromFile() {
+        List<String> addressBookList = new ArrayList<String>();
+        String bookName = this.getAddressBookName();
+        String fileName = bookName + ".txt";
+        System.out.println("Reading from file " + fileName + "\n");
+
+        try {
+            Files.lines(new File(fileName).toPath()).map(line -> line.trim()).forEach(employeeDetails -> {
+                System.out.println(employeeDetails);
+                addressBookList.add(employeeDetails);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return addressBookList;
     }
 }
